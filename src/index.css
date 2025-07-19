@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+@theme {
+  --font-zentry: "zentry", sans-serif;
+  --font-general: "general", sans-serif;
+  --font-circular-web: "circular-web", sans-serif;
+  --font-robert-medium: "robert-medium", sans-serif;
+  --font-robert-regular: "robert-regular", sans-serif;
+  --color-yellow-10: #8e983f;
+  --color-yellow-20: #edff66;
+  --color-violet-10: #5724ff;
+  --color-blue-20: #4fb7dd;
+  --color-blue-30: #dfdff2;
+  --color-blue-70: #f0f2fa;
+}
+
+body {
+  width: 100dvw;
+  overflow-x: hidden;
+  background-color: #dfdff0;
+  font-family: sans-serif;
+}
+
+@layer base {
+  @font-face {
+    font-family: "circular-web";
+    src: url("/fonts/circularweb-book.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "general";
+    src: url("/fonts/general.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "robert-medium";
+    src: url("/fonts/robert-medium.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "robert-regular";
+    src: url("/fonts/robert-regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "zentry";
+    src: url("/fonts/zentry-regular.woff2") format("woff2");
+  }
+}
+
+@layer utilities {
+  .absolute-center {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .mask-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .floating-nav {
+    @apply bg-black rounded-lg border;
+  }
+
+  .hero-heading {
+    @apply uppercase font-zentry font-black text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
+  }
+
+  .sword-man-clip-path {
+    clip-path: polygon(16% 0, 89% 15%, 75% 100%, 0 97%);
+  }
+
+  .contact-clip-path-1 {
+    clip-path: polygon(25% 0%, 74% 0, 69% 64%, 34% 73%);
+  }
+
+  .contact-clip-path-2 {
+    clip-path: polygon(29% 15%, 85% 30%, 50% 100%, 10% 64%);
+  }
+
+  .nav-hover-btn {
+    @apply relative hidden md:inline-block h-full ms-5 font-general text-xs uppercase text-blue-50 hover:text-black font-semibold hover:bg-violet-50 px-4 transition-all duration-200 py-2 rounded-full cursor-pointer border-none;
+  }
+
+  .story-img-container {
+    @apply relative md:h-dvh h-[90vh] w-full;
+    filter: url("#flt_tag");
+  }
+
+  .story-img-content {
+    @apply absolute w-full md:h-dvh h-[50dvh] opacity-100 left-10 top-14 md:left-0 md:top-8 lg:left-[-300px] lg:top-[-100px];
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+  }
+
+  .story-img-mask {
+    @apply absolute left-0 top-0 size-full overflow-hidden md:left-[20%] md:top-[-10%] md:size-4/5;
+    clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+  }
+
+  .special-font b {
+    font-family: "zentry";
+    font-feature-settings: "ss01" on;
+  }
+
+  .about-image {
+    @apply absolute left-1/2 top-0 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-xl md:w-[30vw];
+  }
+
+  .about-subtext {
+    @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem];
+  }
+
+  .bento-title {
+    @apply uppercase md:text-6xl text-4xl font-black font-zentry;
+  }
+
+  .border-hsla {
+    @apply border border-white/20;
+  }
+
+  .animated-title {
+    @apply flex flex-col gap-1 text-7xl uppercase leading-[.8] text-white sm:px-32 md:text-[6rem];
+  }
+
+  .bento-tilt_1 {
+    @apply relative col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out hover:border-white/40;
+  }
+
+  .bento-tilt_2 {
+    @apply relative col-span-1 row-span-1 overflow-hidden rounded-md transition-transform duration-300 ease-out;
+  }
+
+  .animated-word {
+    @apply font-zentry font-black opacity-1;
+    transform: translate3d(308px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
+    transform-origin: 50% 50% -150px !important;
+    will-change: opacity, transform;
+  }
+}
+
+/* Music Button Animation */
+.indicator-line {
+  @apply h-1.5 w-[1.5px] rounded-full bg-white transition-all duration-200 ease-in-out;
+}
+
+.indicator-line.active {
+  animation: indicator-line 0.5s ease infinite;
+  animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+@keyframes indicator-line {
+  0% {
+    height: 4px;
+    transform: translateY(-0px);
+    background-color: #47e2f0ac;
+  }
+  50% {
+    height: 16px;
+    transform: translateY(-4px);
+  }
+  100% {
+    height: 4px;
+    transform: translateY(-0px);
+    color: #656fe236;
+  }
+}
+
+/* Loading Animation */
+/* https://uiverse.io/Nishank0744/smart-rabbit-24 */
+
+.cubes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+}
+
+.loop {
+  transform: rotateX(-38deg) rotateY(-46deg) translateZ(1.5625em);
+}
+
+@keyframes s {
+  to {
+    transform: scale3d(0.2, 0.2, 0.2);
+  }
+}
+
+.item {
+  margin: -1.5625em;
+  width: 3.125em;
+  height: 3.125em;
+  transform-origin: 50% 50% -1.5625em;
+  box-shadow: 0 0 0.125em currentColor;
+  background: currentColor;
+  animation: s 0.6s cubic-bezier(0.45, 0.03, 0.51, 0.95) infinite alternate;
+}
+
+.item:before,
+.item:after {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  transform-origin: 0 100%;
+  box-shadow: inherit;
+  background: currentColor;
+  content: "";
+}
+
+.item:before {
+  bottom: 100%;
+  transform: rotateX(90deg);
+}
+
+.item:after {
+  left: 100%;
+  transform: rotateY(90deg);
+}
+
+.item:nth-child(1) {
+  margin-top: 6.25em;
+  color: #15cae6;
+  animation-delay: -1.2s;
+}
+
+.item:nth-child(1):before {
+  color: #15cae6;
+}
+
+.item:nth-child(1):after {
+  color: #15cae6;
+}
+
+.item:nth-child(2) {
+  margin-top: 3.125em;
+  color: #1550e6;
+  animation-delay: -1s;
+}
+
+.item:nth-child(2):before {
+  color: #1550e6;
+}
+
+.item:nth-child(2):after {
+  color: #1550e6;
+}
+
+.item:nth-child(3) {
+  margin-top: 0em;
+  color: #0c25c3;
+  animation-delay: -0.8s;
+}
+
+.item:nth-child(3):before {
+  color: #0c25c3;
+}
+
+.item:nth-child(3):after {
+  color: #0c25c3;
+}
+
+.item:nth-child(4) {
+  margin-top: -3.125em;
+  color: #2d1fe9;
+  animation-delay: -0.6s;
+}
+
+.item:nth-child(4):before {
+  color: #2d1fe9;
+}
+
+.item:nth-child(4):after {
+  color: #2d1fe9;
+}
+
+.item:nth-child(5) {
+  margin-top: -6.25em;
+  color: #ae0cd6;
+  animation-delay: -0.4s;
+}
+
+.item:nth-child(5):before {
+  color: #ae0cd6;
+}
+
+.item:nth-child(5):after {
+  color: #ae0cd6;
+}
+
+.item:nth-child(6) {
+  margin-top: -9.375em;
+  color: #7e0963;
+  animation-delay: -0.2s;
+}
+
+.item:nth-child(6):before {
+  color: #7e0963;
+}
+
+.item:nth-child(6):after {
+  color: #7e0963;
+}
